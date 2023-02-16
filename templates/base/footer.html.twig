@@ -1,0 +1,53 @@
+<!--FOOTER -->
+<div class="footer">
+
+	<div class="hour">
+
+		<table>
+			<thead>
+				<tr>
+					<th>
+						Nos horaires</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				{% for hour in hours %}
+					<tr>
+						<td>{{ hour.day }}</td>
+
+						{% if (hour.noonOpening|date('H:i') == "00:00") and  (hour.noonClosing|date('H:i') == "00:00") and (hour.eveningOpening|date|date('H:i') == "00:00") and  (hour.eveningClosing|date('H:i') == "00:00") %}
+
+							<td>Fermé</td>
+						{% else %}
+							<td>
+								{% if (hour.noonOpening|date('H:i') == "00:00") and  (hour.noonClosing|date('H:i') == "00:00") %}
+									Fermé
+								{% else %}
+									{{hour.noonOpening|date('H:i')}}
+									{{hour.noonClosing|date('H:i')}}
+								{% endif %}
+							</td>
+						</tr>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							{% if (hour.eveningOpening|date|date('H:i') == "00:00") and  (hour.eveningClosing|date('H:i') == "00:00") %}
+								Fermé
+							{% else %}
+								{{hour.eveningOpening|date('H:i')}}
+								{{hour.eveningClosing|date('H:i')}}
+							{% endif %}
+
+						</td>
+
+
+					{% endif %}
+
+				</tr>
+
+			{% endfor %}
+		</tbody>
+	</table>
+</div></div>

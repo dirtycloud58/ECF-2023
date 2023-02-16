@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue au Quai Antique
+{% endblock %}
+{% block body %}
+
+	<div class="container">
+		<div class="image-home"></div>
+
+		{% for galery in galerys %}
+			<div class="galeries">
+				<img src="{{ vich_uploader_asset(galery,'imageFile') }}" alt="{{ galery.name }}" class="galeries-img">
+			</div>
+		{% endfor %}
+
+	</div>
+{% endblock %}

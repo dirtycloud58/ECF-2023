@@ -1,12 +1,19 @@
 <!--NAVBAR -->
-<div class="navbar">
+<header class="navbar">
 	<div class="logo">
 		<img src="/img/logo.png" alt="logo" class="img-logo">
 	</div>
-	<div class="navigation">
-		<ul>
-			<li>
-				<a href="{{path('app_home')}}">Accueil</a>
+	<nav class="nav_menu">
+		<label htmlfor="menu_toggle" class="nav_label">
+			<img src="img/burger.svg" alt="burger_menu">
+			<input type="checkbox" id="menu_toggle"/>
+		</label>
+
+		<div class="navigation_none" id="divNav">
+			<ul>
+				<li>
+					<a href="{{path('app_home')}}">Accueil</a>
+				</li>
 			</li>
 			<li>
 				<a href="{{path('app_card')}}">La carte</a>
@@ -14,24 +21,24 @@
 			<li>
 				<a href="{{path('app_reservation')}}">Réservation</a>
 			</li>
-		</ul>
-		{% if is_granted("ROLE_USER") %}
-			<li>
-				<a href="#">Mon compte</a>
-			</li>
+			{% if is_granted("ROLE_USER") %}
+				<li>
+					<a href="#">Mon compte</a>
+				</li>
 
-			<li>
-				<a href="{{path('app_logout')}}">Me déconnecter</a>
-			</li>
-		{% else %}
-			<li>
-				<a href="{{path('app_register')}}">M'inscrire</a>
-			</li>
-			<li>
-				<a href="{{path('app_login')}}">Me connecter</a>
-			</li>
-		{% endif %}
+				<li>
+					<a href="{{path('app_logout')}}">Me déconnecter</a>
+				</li>
+			{% else %}
+				<li>
+					<a href="{{path('app_register')}}">M'inscrire</a>
+				</li>
+				<li>
+					<a href="{{path('app_login')}}">Me connecter</a>
+				</li>
+			{% endif %}
+		</ul>
 
 
 	</div>
-</div>
+</nav></header>

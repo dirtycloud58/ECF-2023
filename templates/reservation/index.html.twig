@@ -26,10 +26,18 @@
 			{{ form_label(reservationForm.allergies) }}
 			{{ form_widget(reservationForm.allergies) }}
 		</div>
+		<div class="form-group">
+			{{ form_label(reservationForm.date) }}
+			{{ form_widget(reservationForm.date) }}
+		</div>
+		<div class="form-group">
+			{{ form_label(reservationForm.hour) }}
+			{{ form_widget(reservationForm.hour) }}
+		</div>
+		<div class="form-group">
+			<button type="submit" class="btn">Réserver</button>
+		</div>
 
-		{{ form_row(reservationForm.date) }}
-		{{ form_row(reservationForm.hour) }}
-		<button type="submit" class="btn">Réserver</button>
 		{{ form_end(reservationForm) }}
 	</div>
 {% endblock %}

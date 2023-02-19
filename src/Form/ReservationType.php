@@ -32,8 +32,14 @@ class ReservationType extends AbstractType
                     'class' => 'selectAllergys'
                 ]
             ])
-            ->add('date', DateType::class)
-            ->add('hour', TimeType::class);
+            ->add('date', DateType::class, [
+                'widget' => 'single_text',
+                'attr' => ['class' => 'js-datepicker']
+            ])
+            ->add('hour', TimeType::class, [
+                'widget' => 'single_text',
+                'input'  => 'timestamp',
+            ]);
     }
 
 

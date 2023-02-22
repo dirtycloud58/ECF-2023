@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Reservation;
-use App\Entity\User;
 use App\Form\ReservationType;
 use App\Repository\AllergyRepository;
 use App\Repository\HourRepository;
+use App\Repository\ReservationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +20,7 @@ class ReservationController extends AbstractController
 
 
     #[Route('/reservation', name: 'app_reservation')]
-    public function index(Request $request, EntityManagerInterface $entityManager, HourRepository $hourRepository, AllergyRepository $allergy): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, HourRepository $hourRepository, ReservationRepository $reversations): Response
     {
         $user = $this->getUser();
         $reservation = new Reservation();
@@ -43,6 +43,7 @@ class ReservationController extends AbstractController
         return $this->render('reservation/index.html.twig', [
             'reservationForm' => $reservationForm->createView(),
             'hours' => $hourRepository->findByHour(),
+            'reservations' => $reversations->findByReservation(),
         ]);
     }
 }

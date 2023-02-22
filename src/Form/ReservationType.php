@@ -34,11 +34,11 @@ class ReservationType extends AbstractType
             ])
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
-                'attr' => ['class' => 'js-datepicker']
+
             ])
             ->add('hour', TimeType::class, [
                 'widget' => 'single_text',
-                'input'  => 'timestamp',
+
             ]);
     }
 

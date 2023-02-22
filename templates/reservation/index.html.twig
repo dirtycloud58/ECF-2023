@@ -7,10 +7,12 @@
 	<div class="container">
 
 		<h1>Réservation</h1>
-		{% if is_granted("ROLE_USER") %}
-			{% else %}
-				<a href="{{path('app_login')}}">Me connecter</a>
-		{% endif %}
+		<div class="connect">
+			{% if is_granted("ROLE_USER") %}
+				{% else %}
+					<a href="{{path('app_login')}}">Me connecter</a>
+			{% endif %}
+		</div>
 
 
 		{{ form_start(reservationForm) }}
@@ -37,7 +39,10 @@
 		<div class="form-group">
 			<button type="submit" class="btn">Réserver</button>
 		</div>
-
 		{{ form_end(reservationForm) }}
 	</div>
+	{% for reservation in reservations %}
+		<span class="js-count">{{ reservation.guests}}</span>
+	{% endfor %}
+
 {% endblock %}

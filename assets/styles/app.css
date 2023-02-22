@@ -742,6 +742,21 @@ a :hover {
   animation: 0.2s border 1 both;
 }
 
+button {
+  width: 30vw;
+  margin-top: 5%;
+  padding: 2%;
+  background-color: #1a8ea0;
+  color: white;
+  font-size: 2em;
+  border: none;
+  border-radius: 25px;
+  text-shadow: 3px 2px 8px #25b8ea;
+}
+button:hover {
+  cursor: pointer;
+}
+
 nav ul {
   border-radius: 0 0 25% 25%;
   background-color: #c29a74;
@@ -758,6 +773,16 @@ nav ul {
   width: 100vw;
   min-height: 40vh;
   padding-top: 10vh;
+}
+
+.connect {
+  display: flex;
+  justify-content: center;
+  padding: 2% 0 2% 0;
+}
+.connect a {
+  color: #eba237;
+  border-bottom: 1px solid #1a8ea0;
 }
 
 .image-home {
@@ -866,13 +891,14 @@ nav ul {
 }
 
 .footer {
-  height: 50vh;
+  min-height: 50vh;
   display: flex;
   background-color: #c29a74;
 }
 
 form {
   width: 100vw;
+  padding: 5% 0 5% 0;
   display: flex;
   flex-direction: column;
   justify-content: center;

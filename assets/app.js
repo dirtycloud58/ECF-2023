@@ -24,3 +24,15 @@ function navClick() {
   }
 }
 navSvg.addEventListener("click", navClick);
+
+//apprentisage ajax
+
+// récuperer la date saisie par l'utilisateur
+
+let date = document.getElementById("reservation_date");
+let guests = document.getElementById("reservations_guests");
+let dateVal = date.value;
+let guestsVal = guests.value;
+
+console.log(dateVal);
+console.log(guestsVal);

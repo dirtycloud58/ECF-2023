@@ -7,8 +7,6 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import "./styles/app.scss";
-// start the Stimulus application
-//import "./bootstrap";
 
 // dynamique navbar
 let navSvg = document.getElementById("menu_toggle");
@@ -24,15 +22,53 @@ function navClick() {
   }
 }
 navSvg.addEventListener("click", navClick);
+// Récupérez le calendrier datetype et le choix de l'heure en utilisant leur ID
+const dateField = document.getElementById("reservation_date");
+const timeField = document.getElementById("reservation_hour");
 
-//apprentisage ajax
+// Ajoutez un écouteur d'événements sur le changement de valeur du calendrier datetype
+dateField.addEventListener("change", updateOpeningHours);
 
-// récuperer la date saisie par l'utilisateur
+function updateOpeningHours() {
+  var date = $("#dateType").val();
+  const selectedDate = new Date(dateField.value);
+  const selectedDay = selectedDate
+    .toLocaleString("fr-FR", { weekday: "long" })
+    .replace(/^\w/, (c) => c.toUpperCase());
+  console.log(selectedDay);
+  $.ajax({
+    url: "/reservation",
+    method: "POST",
+    data: { date: selectedDay },
+    success: function (response) {
+      var openingHours = JSON.parse(response);
+      var options = "";
 
-let date = document.getElementById("reservation_date");
-let guests = document.getElementById("reservations_guests");
-let dateVal = date.value;
-let guestsVal = guests.value;
+      // Ajouter les options pour les heures du midi
+      for (
+        var hour = openingHours.morning_open;
+        hour < openingHours.morning_close;
+        hour += 0.5
+      ) {
+        var displayHour = hour.toString().replace(".", ":");
+        options +=
+          '<option value="' + displayHour + '">' + displayHour + "</option>";
+      }
 
-console.log(dateVal);
-console.log(guestsVal);
+      // Ajouter les options pour les heures du soir
+      for (
+        var hour = openingHours.evening_open;
+        hour < openingHours.evening_close;
+        hour += 0.5
+      ) {
+        var displayHour = hour.toString().replace(".", ":");
+        options +=
+          '<option value="' + displayHour + '">' + displayHour + "</option>";
+      }
+
+      $("#choiceType").html(options);
+    },
+  });
+}
+
+$("#dateType").change(updateOpeningHours);

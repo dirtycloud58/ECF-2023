@@ -5,6 +5,7 @@
 
 {% block body %}
 	<div class="container">
+
 		<form method="post">
 			{% if error %}
 				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -28,18 +29,20 @@
 			<div class="form-group">
 				<label for="inputPassword">Mot de passe</label>
 				<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
 			</div>
 
 			<div class="form-checkbox">
 				<label>
 					Se souvenir de moi
-					<input type="checkbox" name="_remember_me">
+					<input type="checkbox" name="_remember_me" id="inputCheckbox">
 				</label>
 			</div>
 
-			<div class="form-group">
-				<button class="btn btn-lg btn-primary" type="submit">
+			<div class="btn">
+				<button type="submit" id="inputSubmit">
 					Me connecter
 				</button>
 			</div>

@@ -61,11 +61,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
      */
 
 
-    public function findByUser($value): array
+    public function findByUser()
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.user = :user')
-            ->setParameter('user', $value)
             ->orderBy('u.id', 'ASC')
             ->getQuery()
             ->getResult();

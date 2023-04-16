@@ -1,5 +1,5 @@
 @import "./config/config";
-@import "./selector/selector";
+@import "./cdn/selector";
 
 * {
   margin: 0;
@@ -10,6 +10,7 @@ body {
   background-color: white;
   max-width: 100%;
   max-height: 100%;
+  font-size: 16px;
 }
 
 h1,
@@ -24,13 +25,13 @@ thead {
 
 h1,
 thead {
-  font-size: 6em;
-}
-h2 {
   font-size: 4em;
 }
-h3 {
+h2 {
   font-size: 3em;
+}
+h3 {
+  font-size: 2em;
 }
 
 h1,
@@ -40,16 +41,16 @@ h3 {
 }
 
 p,
-a,
 tbody,
 label,
 input,
 select {
   font-family: $font2;
+  font-size: 1.5em;
 }
 
 ul {
-  height: 40vh;
+  max-height: 40vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -61,9 +62,13 @@ li {
   display: flex;
   justify-content: center;
   width: 100vw;
+  a {
+    font-size: 1.5em;
+  }
 }
 
 a {
+  font-family: $font2;
   color: white;
   outline: none;
   font-weight: 500;
@@ -71,41 +76,56 @@ a {
 }
 
 button {
-  min-width: 30vw;
-  margin-top: 5%;
-  padding: 2%;
+  min-width: 5vw;
+  margin: 5%;
+  padding: 3%;
   background-color: $color2;
   color: white;
+  font-size: 2em;
   border: none;
   border-radius: 25px;
   text-shadow: 3px 2px 8px $color1;
+  border: 2px solid transparent;
   &:hover {
     cursor: pointer;
     border: 2px solid $color4;
   }
 }
+
 nav {
   ul {
-    border-radius: 0 0 25% 25%;
+    border-radius: 0 0 15% 15%;
     background-color: $color3;
   }
+  li {
+    padding: 1%;
+  }
 }
-
+.reservation {
+  background-color: white;
+  a {
+    color: $color4;
+    font-weight: 600;
+  }
+}
 // homepage
 .container {
   width: 100vw;
   min-height: 40vh;
   padding-top: 10vh;
 }
+
 .connect {
   display: flex;
   justify-content: center;
   padding: 2% 0 2% 0;
   a {
     color: $color4;
+    font-size: 2em;
     border-bottom: 1px solid $color2;
   }
 }
+
 .image-home {
   display: flex;
   justify-content: center;
@@ -116,8 +136,6 @@ nav {
   background-size: cover;
   background-position: center;
   h1 {
-    width: 70%;
-    height: 30%;
     color: white;
   }
 }
@@ -127,25 +145,28 @@ nav {
   margin: 0 auto;
   padding-bottom: 2%;
 }
+
 .galeries {
   display: flex;
   position: relative;
   align-items: center;
   justify-content: center;
-  h1 {
+  h3 {
     position: absolute;
     padding: 0;
     margin: 0;
-    width: 80%;
+    width: 100%;
     height: 100%;
     display: flex;
-    font-size: 3em;
     color: transparent;
     &:hover {
       color: white;
+      text-shadow: -2px -4px 6px rgba(235, 162, 55, 0.79);
+      backdrop-filter: blur(4px);
     }
   }
 }
+
 .galeries-img {
   padding: 2%;
   width: 80vw;
@@ -163,7 +184,7 @@ nav {
 }
 
 .nav_menu {
-  width: 60vw;
+  width: 75vw;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
@@ -171,17 +192,18 @@ nav {
     width: 10vw;
   }
 }
-
+.burger {
+  width: 100%;
+  border-radius: 25%;
+  margin: auto;
+  background-color: $color4;
+}
 .nav_label {
   display: flex;
   height: 10vh;
   padding-right: 5vw;
   cursor: pointer;
   img {
-    width: 70%;
-    border-radius: 25%;
-    margin: auto;
-    background-color: $color4;
     &:focus,
     &:hover {
       animation: wobble 2s;
@@ -208,7 +230,7 @@ nav {
 }
 
 .logo {
-  width: 40vw;
+  width: 25vw;
   img {
     padding-top: 2vh;
     padding-left: 5%;
@@ -230,6 +252,7 @@ nav {
 
 .navigation_none {
   display: none;
+  width: 100vw;
 }
 
 //footer
@@ -241,6 +264,8 @@ nav {
 }
 
 .hour {
+  margin-top: 5%;
+  margin-bottom: 5%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -257,6 +282,7 @@ form {
 }
 
 input,
+select,
 .selectAllergys {
   width: 80vw;
 }
@@ -264,7 +290,6 @@ input,
 input,
 .selectAllergys,
 select {
-  min-height: 2vh;
   cursor: pointer;
   border: 2px solid $color1;
   border-radius: 5px;
@@ -276,15 +301,16 @@ select {
   margin: 0 auto;
   flex-direction: column;
   label {
-    width: 80vw;
     margin: 1% 0 1% 0;
   }
 }
+
 .group {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
 }
+
 .form-select {
   display: flex;
   margin: 0 auto;
@@ -292,7 +318,7 @@ select {
   label,
   input,
   select {
-    width: 20vw;
+    min-width: 20vw;
     margin: 1% 0 1% 0;
   }
 }
@@ -315,7 +341,6 @@ select {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2%;
 }
 .category,
 .formule {
@@ -326,6 +351,7 @@ select {
   justify-content: center;
   align-items: center;
 }
+
 .card {
   h1 {
     color: $color4;
@@ -337,8 +363,12 @@ select {
     text-align: center;
   }
 }
+
 .profile {
   text-align: center;
+  li {
+    font-size: 1.5em;
+  }
   ul {
     height: auto;
   }
@@ -362,15 +392,19 @@ select {
     font-size: 2em;
   }
 }
+
 .allergies {
   background-color: $color1;
 }
+
 .message {
   background-color: $color1;
 }
+
 .erreur {
   background-color: red;
 }
+
 .message,
 .erreur {
   width: 100vw;
@@ -379,6 +413,7 @@ select {
   text-align: center;
   vertical-align: middle;
 }
+
 .info {
   border-top: 2px solid $color3;
   width: 80vw;
@@ -386,6 +421,80 @@ select {
   margin: auto;
   padding-top: 2%;
 }
+
 .vide {
   height: 2vh;
+}
+
+.container-galery {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+.datepicker {
+  padding: 0 !important;
+}
+
+@media screen and (min-width: 760px) {
+  .nav_menu {
+    flex-wrap: nowrap;
+  }
+  .navbar {
+    label {
+      display: none;
+    }
+  }
+  .nav_label {
+    img {
+      display: none;
+    }
+  }
+  .navigation_none {
+    display: flex;
+  }
+  nav {
+    ul {
+      width: 75vw;
+      height: 10vh;
+      background-color: transparent;
+    }
+    li {
+      width: auto;
+      padding-left: 2%;
+    }
+    a {
+      color: black;
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  body {
+    font-size: 20px;
+  }
+  .container-galery {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .galeries-img {
+    width: 30vw;
+  }
+
+  .form-group,
+  .form-checkbox,
+  .selectAllergys {
+    width: 30vw;
+  }
+
+  .group {
+    flex-direction: column;
+  }
+
+  button {
+    margin: 1%;
+    padding: 1%;
+  }
+  input,
+  select {
+    width: auto;
+  }
 }

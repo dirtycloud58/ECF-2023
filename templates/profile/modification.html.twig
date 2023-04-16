@@ -12,21 +12,13 @@
 		{% endfor %}
 		<h1>Votre profil</h1>
 		<div class="profile">
-			<form method="post">
-				<div class="form-group">
-					<label for="pass">nouveau mot de passe</label>
-					<input type="password" id="pass" name="pass">
-				</div>
-				<div class="form-group">
-					<label for="pass2">confirmer mot de passe</label>
-					<input type="password" id="pass2" name="pass2">
-				</div>
-				<div class="btn">
-					<button>
-						Modifier le mot de passe
-					</button>
-				</div>
-			</form>
+
+			<div class="btn">
+				<button>
+					<a href={{path('app_modification_mdp')}}>Modifier le mot de passe</a>
+				</button>
+			</div>
+
 			{{form_start(editProfile)}}
 			<div class="form-group">
 				{{ form_label(editProfile.guests) }}
@@ -41,4 +33,17 @@
 			</div>
 			{{form_end(editProfile)}}
 		</div>
+		<div class="btn">
+			<button>
+				<a href={{path('app_profile')}}>retour</a>
+			</button>
+		</div>
+	{% endblock %}
+	{% block javascripts %}
+		<script>
+			$(document).ready(function () {
+$('.selectAllergys').select2({});
+
+});
+		</script>
 	{% endblock %}

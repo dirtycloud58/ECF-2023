@@ -8,25 +8,22 @@
 
 		<h1>Réservation</h1>
 		{{ form_start(reservationForm) }}
-		
+
 		<div class="form-group">
 			{{ form_label(reservationForm.email) }}
 			{{ form_widget(reservationForm.email) }}
 		</div>
-		<div class="group">
-			<div class="form-select">
-				{{ form_label(reservationForm.guests) }}
-				{{ form_widget(reservationForm.guests) }}
-			</div>
-			<div class="form-select">
-				{{ form_label(reservationForm.date) }}
-				{{ form_widget(reservationForm.date) }}
-			</div>
-	
-			<div class="form-select">
-				{{ form_label(reservationForm.hour) }}
-				{{ form_widget(reservationForm.hour) }}
-			</div>
+		<div class="form-select">
+			{{ form_label(reservationForm.guests) }}
+			{{ form_widget(reservationForm.guests) }}
+		</div>
+		<div class="form-select">
+			{{ form_label(reservationForm.date) }}
+			{{ form_widget(reservationForm.date) }}
+		</div>
+		<div class="form-select">
+			{{ form_label(reservationForm.hour) }}
+			{{ form_widget(reservationForm.hour) }}
 		</div>
 
 		<div class="form-group">
@@ -35,16 +32,95 @@
 		</div>
 
 		<div class="btn">
-			<button type="submit">Réserver</button>
+			<button type="submit" id="submit">Réserver</button>
 		</div>
 		{{ form_end(reservationForm) }}
+
+
 		<div class="connect">
 			{% if is_granted("ROLE_USER") %}
 				{% else %}
 					<a href="{{path('app_login')}}">Me connecter</a>
 			{% endif %}
 		</div>
-	</div>
 
 
-{% endblock %}
+	{% endblock %}
+
+	{% block javascripts %}
+
+
+		<script>
+			$(document).ready(function () { // $('.datepicker').datepicker({format: 'dd-mm-yyyy', autoclose: true, todayHighlight: true, startDate: new Date()}); // Récupérez l'élément select
+var timeSelect = $('#reservation_hour');
+var dateField = $('#reservation_date');
+dateField.change(function () {
+timeSelect.show();
+var date = $(this).val();
+// Supprimez les options précédentes
+timeSelect.find('option').remove();
+// Envoyez une requête AJAX pour récupérer les options d'heure
+$.ajax({
+type: 'GET',
+url: `/reservation/hours?date=${date}`, // Remplacez la date par la valeur souhaitée
+dataType: 'json',
+success: function (data) {
+var options = ''; // Parcourez les options d'heure et ajoutez-les à l'élément select
+$.each(data, function (key, value) {
+options += '<option value="' + value + '">' + value + '</option>';
+});
+
+timeSelect.empty().append(options);
+
+},
+error: function () {
+swal('Error', 'Une erreur est survenue', 'error');
+}
+});
+/*$('form').submit(function (event) {
+event.preventDefault();
+var form = $(this);
+console.log(form.serialize());
+$.ajax({
+url: '/reservation',
+type: 'POST',
+data: form.serialize(),
+success: function (response) { // console.log(response);
+swal('Success', 'Votre réservation a été enregistrée.', 'success');
+},
+error: function (error) {
+console.log(error.responseText);
+swal('Error', 'Une erreur est survenue', 'error');
+}
+})
+
+})*/
+
+});
+});
+		</script>
+		<script>
+			// dynamique navbar
+let navSvg = document.getElementById("menu_toggle");
+let nav = document.getElementById("divNav");
+
+function navClick() {
+if (nav.classList == "navigation_none") {
+nav.classList.add("navigation");
+nav.classList.remove("navigation_none");
+} else {
+nav.classList.add("navigation_none");
+nav.classList.remove("navigation");
+}
+console.log("coucou");
+}
+navSvg.addEventListener("click", navClick);
+		</script>
+		<script>
+			$(document).ready(function () {
+$('.selectAllergys').select2({});
+
+});
+		</script>
+
+	{% endblock %}

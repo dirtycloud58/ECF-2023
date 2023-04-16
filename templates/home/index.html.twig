@@ -5,23 +5,30 @@
 {% block body %}
 
 	<div class="container">
+		{% for message in app.flashes('message') %}
+			<div class="message">
+				<p>{{message}}</p>
+			</div>
+		{% endfor %}
 		<div class="image-home">
 			<h1>Quai Antique</h1>
 		</div>
 		<div class="accueil">
 			<h1>Bienvenue</h1>
-			<p>Le restaurant Au quai Antique est situé sur les rives de la Bretagne. <br>
-			Le Chef vous propose une cuisine de saison et quelques savoureuses spécialités iodées, plateaux de fruits de mer,poissons des côtes et des rivières, coquillages… Le tout préparé maison.
+			<p>Le restaurant Au quai Antique est situé sur les rives de la Bretagne.
+				<br>
+				Le Chef vous propose une cuisine de saison et quelques savoureuses spécialités iodées, plateaux de fruits de mer,poissons des côtes et des rivières, coquillages… Le tout préparé maison.
 			</p>
 			<p>Nous vous présentons nos trois plats du moment.</p>
 		</div>
-
-		{% for galery in galerys %}
-			<div class="galeries">
-				<h1>{{galery.name}}</h1>
-				<img src="{{ vich_uploader_asset(galery,'imageFile') }}" alt="{{ galery.name }}" class="galeries-img">
-			</div>
-		{% endfor %}
+		<div class="container-galery">
+			{% for galery in galerys %}
+				<div class="galeries">
+					<h3>{{galery.name}}</h3>
+					<img src="{{ vich_uploader_asset(galery,'imageFile') }}" alt="{{ galery.name }}" class="galeries-img">
+				</div>
+			{% endfor %}
+		</div>
 
 
 		<div class="btn">

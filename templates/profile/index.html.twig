@@ -16,69 +16,64 @@
 		<div class="profile">
 
 			<p>Vous etes connecté avec l'adresse :
-				{{ app.user.email}}</p>
+				<br>
+				{{ app.user.email}}</p><br>
 			<p>Votre nombre de convives :
-				{{app.user.guests}}</p>
+				<br>
+				{{app.user.guests}}</p><br>
+			<p>Vos allergies :
+				<br>
+				<ul>
+					{% for allergies in app.user.allergies %}
 
-			<p>Vos allergies :</p>
-		</br>
-		<ul>
-			{% for allergies in app.user.allergies %}
+						<li>{{allergies.name}}</li>
+					{% endfor %}
+				</ul>
+			</p><br>
+			<h2>Vos Réservations</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Heure</th>
+						<th>Convives</th>
 
-				<li>{{allergies.name}}</li>
+					</tr>
+				</thead>
+				<tbody>
+					{% for reservation in reservations %}
+						{% if app.user.email == reservation.email %}
+							<tr>
+								<td>{{reservation.date|date('M:Y:d')}}
+								</td>
+								<td>{{reservation.hour|date('H:i')}}
+								</td>
+								<td>{{reservation.guests}}
+								</td>
+							</tr>
+							<tr>
+								<td class="allergies">allergies</td>
+								<td colspan="2">
+									{% for allergy in reservation.allergies %}
 
-			{% endfor %}
-		</ul>
+										{{allergy.name}}
 
-		<h2>Vos Réservations</h2>
-		<table>
-			<thead>
-				<tr>
-					<th>Date</th>
-					<th>Heure</th>
-					<th>Convives</th>
-
-				</tr>
-			</thead>
-			<tbody>
-				{% for reservation in reservations %}
-					{% if app.user.email == reservation.email %}
-						<tr>
-							<td>{{reservation.date|date('M:Y:d')}}
-							</td>
-							<td>{{reservation.hour|date('H:i')}}
-							</td>
-							<td>{{reservation.guests}}
-							</td>
-						</tr>
-						<tr>
-							<td class="allergies">allergies</td>
-							<td colspan="2">
-								{% for allergy in reservation.allergies %}
-
-									{{allergy.name}}
-
-								{% endfor %}
-							</td>
-						</tr>
-						<tr class="vide"></tr>
-					{% endif %}
-				{% endfor %}
-			</tbody>
-
-
-		</table>
-		<div class="info">
-			<p>vous pouvez modifier votre mot de passe, nombre de convives et vos allergies en cliquant sur le bouton "Modifier votre profil"</p>
-		</div>
-
+									{% endfor %}
+								</td>
+							</tr>
+							<tr class="vide"></tr>
+						{% endif %}
+					{% endfor %}
+				</tbody>
+			</table>
+			<div class="info">
+				<p>vous pouvez modifier votre mot de passe, nombre de convives et vos allergies en cliquant sur le bouton "Modifier votre profil"</p>
+			</div>
+		</p>
 	</div>
-
 	<div class="btn">
 		<button>
 			<a href={{path('app_modification')}}>Modifier le profil</a>
 		</button>
 	</div>
-
-
 </div>{% endblock %}

@@ -25,8 +25,11 @@ class Reservation
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $hour = null;
+    /*     #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $hour = null; */
+
+    #[ORM\Column(length: 255)]
+    private ?string $hour = null;
 
     #[ORM\ManyToMany(targetEntity: Allergy::class, inversedBy: 'reservations')]
     private Collection $allergies;
@@ -78,9 +81,19 @@ class Reservation
 
         return $this;
     }
+    public function getHour(): ?string
+    {
+        return $this->hour;
+    }
 
+    public function setHour(string $hour): self
+    {
+        $this->hour = $hour;
 
-    public function getHour(): ?\DateTimeInterface
+        return $this;
+    }
+
+    /*     public function getHour(): ?\DateTimeInterface
     {
         return $this->hour;
     }
@@ -90,7 +103,7 @@ class Reservation
         $this->hour = $hour;
 
         return $this;
-    }
+    } */
 
     public function __toString()
     {

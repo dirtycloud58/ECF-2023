@@ -23,6 +23,7 @@ class ReservationType extends AbstractType
         $builder
             ->add('email', EmailType::class)
             ->add('guests', ChoiceType::class, [
+                'label' => 'Nombre de convives',
                 'choices' => array_combine(range(1, 18), range(1, 18))
             ])
             ->add('allergies', EntityType::class, [
@@ -44,9 +45,7 @@ class ReservationType extends AbstractType
             ->add('hour', ChoiceType::class, [
                 'label' => 'Heure d\'ouverture',
                 'choices' => $openingHours,
-                'attr' => [
-                    'style' => 'display: none',
-                ],
+
             ]);
     }
 

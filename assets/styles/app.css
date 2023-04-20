@@ -812,6 +812,8 @@ nav li {
 
 .footer {
   min-height: 50vh;
+  width: 100%;
+  flex-direction: column;
   display: flex;
   background-color: #c29a74;
 }
@@ -874,6 +876,10 @@ select {
 .form-select select {
   min-width: 20vw;
   margin: 1% 0 1% 0;
+}
+
+.form-select:nth-of-type(4) {
+  display: none;
 }
 
 .form-checkbox {
@@ -949,23 +955,6 @@ select {
   background-color: #25b8ea;
 }
 
-.message {
-  background-color: #25b8ea;
-}
-
-.erreur {
-  background-color: red;
-}
-
-.message,
-.erreur {
-  width: 100vw;
-  height: 5vh;
-  color: white;
-  text-align: center;
-  vertical-align: middle;
-}
-
 .info {
   border-top: 2px solid #c29a74;
   width: 80vw;
@@ -978,6 +967,19 @@ select {
   height: 2vh;
 }
 
+.list {
+  font-size: 1.5em;
+}
+
+.container-bis {
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 2%;
+}
+.container-bis a {
+  color: #25b8ea;
+}
+
 .container-galery {
   display: flex;
   flex-wrap: nowrap;
@@ -988,7 +990,22 @@ select {
   padding: 0 !important;
 }
 
+.place {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#hidden-noon,
+#hidden-evening {
+  display: none;
+}
+
 @media screen and (min-width: 760px) {
+  body {
+    font-size: 12px;
+  }
   .nav_menu {
     flex-wrap: nowrap;
   }

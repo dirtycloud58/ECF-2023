@@ -259,6 +259,8 @@ nav {
 
 .footer {
   min-height: 50vh;
+  width: 100%;
+  flex-direction: column;
   display: flex;
   background-color: $color3;
 }
@@ -322,7 +324,9 @@ select {
     margin: 1% 0 1% 0;
   }
 }
-
+.form-select:nth-of-type(4) {
+  display: none;
+}
 .form-checkbox {
   display: flex;
   margin: 0 auto;
@@ -397,23 +401,6 @@ select {
   background-color: $color1;
 }
 
-.message {
-  background-color: $color1;
-}
-
-.erreur {
-  background-color: red;
-}
-
-.message,
-.erreur {
-  width: 100vw;
-  height: 5vh;
-  color: white;
-  text-align: center;
-  vertical-align: middle;
-}
-
 .info {
   border-top: 2px solid $color3;
   width: 80vw;
@@ -425,7 +412,17 @@ select {
 .vide {
   height: 2vh;
 }
-
+.list {
+  font-size: 1.5em;
+}
+.container-bis {
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 2%;
+  a {
+    color: $color1;
+  }
+}
 .container-galery {
   display: flex;
   flex-wrap: nowrap;
@@ -434,8 +431,20 @@ select {
 .datepicker {
   padding: 0 !important;
 }
-
+.place {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#hidden-noon,
+#hidden-evening {
+  display: none;
+}
 @media screen and (min-width: 760px) {
+  body {
+    font-size: 12px;
+  }
   .nav_menu {
     flex-wrap: nowrap;
   }

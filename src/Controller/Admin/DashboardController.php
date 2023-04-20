@@ -9,6 +9,7 @@ use App\Entity\Menu;
 use App\Entity\Meal;
 use App\Entity\Formule;
 use App\Entity\Reservation;
+use App\Entity\Place;
 
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -30,6 +31,7 @@ class DashboardController extends AbstractDashboardController
         return $this->redirect($adminUrlGenerator->setController(CategoryCrudController::class)->generateUrl());
         return $this->redirect($adminUrlGenerator->setController(MealCrudController::class)->generateUrl());
         return $this->redirect($adminUrlGenerator->setController(ReservationCrudController::class)->generateUrl());
+        return $this->redirect($adminUrlGenerator->setController(PlaceCrudController::class)->generateUrl());
     }
 
     public function configureDashboard(): Dashboard
@@ -48,5 +50,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Categorie', 'fas fa-list-alt', Category::class);
         yield MenuItem::linkToCrud('Plat', 'fas fa-solid fa-plate-wheat', Meal::class);
         yield MenuItem::linkToCrud('Reservation', 'fa-solid fa-ticket', Reservation::class);
+        yield MenuItem::linkToCrud('place', 'fa-solid fa-arrow-down-1-9', place::class);
     }
 }

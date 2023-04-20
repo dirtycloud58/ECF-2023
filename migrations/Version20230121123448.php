@@ -20,12 +20,12 @@ final class Version20230121123448 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE hour ADD nooOpening TIME NOT NULL, ADD nooClosing TIME NOT NULL, ADD eveningOpening TIME NOT NULL, ADD eveningClosing TIME NOT NULL, DROP noonOpening, DROP noonClosing, DROP eveningOpening, DROP eveningClosing');
+        $this->addSql('ALTER TABLE hour ADD noon_opening TIME NOT NULL, ADD noon_closing TIME NOT NULL, ADD evening_opening TIME NOT NULL, ADD evening_closing TIME NOT NULL, DROP noon_opening, DROP noon_closing, DROP evening_opening, DROP evening_closing');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE hour ADD noonOpening TIME NOT NULL, ADD noonClosing TIME NOT NULL, ADD eveningOpening TIME NOT NULL, ADD eveningClosing TIME NOT NULL, DROP noonOpening, DROP noonClosing, DROP eveningOpening, DROP eveningClosing');
+        $this->addSql('ALTER TABLE hour ADD noon_opening TIME NOT NULL, ADD noon_closing TIME NOT NULL, ADD evening_opening TIME NOT NULL, ADD evening_closing TIME NOT NULL, DROP noon_opening, DROP noon_closing, DROP evening_opening, DROP evening_closing');
     }
 }

@@ -24,6 +24,5 @@ function navClick() {
     nav.classList.add("navigation_none");
     nav.classList.remove("navigation");
   }
-  console.log("coucou");
 }
 navSvg.addEventListener("click", navClick);

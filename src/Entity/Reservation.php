@@ -25,9 +25,6 @@ class Reservation
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    /*     #[ORM\Column(type: Types::TIME_MUTABLE)]
-    private ?\DateTimeInterface $hour = null; */
-
     #[ORM\Column(length: 255)]
     private ?string $hour = null;
 
@@ -93,23 +90,6 @@ class Reservation
         return $this;
     }
 
-    /*     public function getHour(): ?\DateTimeInterface
-    {
-        return $this->hour;
-    }
-
-    public function setHour(\DateTimeInterface $hour): self
-    {
-        $this->hour = $hour;
-
-        return $this;
-    } */
-
-    public function __toString()
-    {
-        return $this->getId();
-    }
-
     /**
      * @return Collection<int, Allergy>
      */
@@ -143,5 +123,10 @@ class Reservation
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->getId();
     }
 }

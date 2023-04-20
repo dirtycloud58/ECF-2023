@@ -26,7 +26,7 @@ class ProfileController extends AbstractController
         ]);
     }
     #[Route('/profil/modifier', name: 'app_modification')]
-    public function editProfile(Request $request,  EntityManagerInterface $entityManager, HourRepository $hourRepository, ReservationRepository $reservationRepo): Response
+    public function editProfile(Request $request, EntityManagerInterface $entityManager, HourRepository $hourRepository): Response
     {
 
         $user = $this->getUser();
@@ -38,19 +38,18 @@ class ProfileController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('message', 'Profil mis à jour');
+            $this->addFlash('success', 'Profil mis à jour');
             return $this->redirectToRoute('app_profile');
         }
 
         return $this->render('profile/modification.html.twig', [
             'editProfile' => $form->createView(),
-            'reservations' => $reservationRepo->findByReservation(),
             'hours' => $hourRepository->findByHour(),
         ]);
     }
 
     #[Route('/profil/modifier/motdepasse', name: 'app_modification_mdp')]
-    public function editMotDePasse(Request $request, HourRepository $hourRepository, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository, ReservationRepository $reservationRepo,  EntityManagerInterface $entityManager): Response
+    public function editMotDePasse(Request $request, HourRepository $hourRepository, UserPasswordHasherInterface $userPasswordHasher, UserRepository $userRepository, EntityManagerInterface $entityManager): Response
     {
         //modification du mot de passe
         if ($request->isMethod('POST')) {
@@ -63,16 +62,13 @@ class ProfileController extends AbstractController
                     )
                 );
                 $entityManager->flush();
-                $this->addFlash('message', 'Mot de passe mis à jour');
+                $this->addFlash('success', 'Mot de passe mis à jour');
 
                 return $this->redirectToRoute('app_profile');
-            } else {
-                $this->addFlash('erreur', 'les deux mots de passe ne sont pas identiques');
             }
         };
         return $this->render('profile/motdepasse.html.twig', [
             '$users' => $userRepository->findByUser(),
-            'reservations' => $reservationRepo->findByReservation(),
             'hours' => $hourRepository->findByHour(),
         ]);
     }

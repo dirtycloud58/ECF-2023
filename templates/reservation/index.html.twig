@@ -103,7 +103,9 @@ eveningHours.sort();
 if (! morningHoursExists) {
 morningHours.push('Fermé');
 }
-
+if (eveningHoursExists && morningHours[0] === 'Fermé' && eveningHours.length > 1) {
+eveningHours.splice(0, 1);
+}
 // Vérifier si des heures existent pour le soir
 if (! eveningHoursExists || (eveningHours.length === 1 && eveningHours[0] === '00:00')) {
 eveningHours = ['Fermé'];
@@ -162,7 +164,7 @@ var reservationGuests = parseInt($('#reservation_guests').val());
 var noonGuests = parseInt($('#noon').text());
 var eveningGuests = parseInt($('#evening').text());
 var reservationHour = $('#reservation_hour').val();
-
+console.log(reservationHour);
 if (reservationHour === 'Fermé') {
 submitButton.hide(); // Cacher le bouton de soumission
 return; // Sortir de la fonction
@@ -220,6 +222,7 @@ checkReservationButton();
 });
 $('#reservation_hour').on('input', function () {
 checkReservationButton();
+
 });
 });
 		</script>

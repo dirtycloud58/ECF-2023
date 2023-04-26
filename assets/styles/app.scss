@@ -396,7 +396,22 @@ select {
     font-size: 2em;
   }
 }
-
+.contact {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2% 0 2% 0;
+  a {
+    font-size: 1.5em;
+    color: black;
+  }
+  p {
+    padding: 2%;
+    text-align: center;
+    color: white;
+  }
+}
 .allergies {
   background-color: $color1;
 }
@@ -414,6 +429,9 @@ select {
 }
 .list {
   font-size: 1.5em;
+  li {
+    display: block;
+  }
 }
 .container-bis {
   width: 80%;

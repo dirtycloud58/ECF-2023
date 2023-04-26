@@ -951,6 +951,23 @@ select {
   font-size: 2em;
 }
 
+.contact {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2% 0 2% 0;
+}
+.contact a {
+  font-size: 1.5em;
+  color: black;
+}
+.contact p {
+  padding: 2%;
+  text-align: center;
+  color: white;
+}
+
 .allergies {
   background-color: #25b8ea;
 }
@@ -969,6 +986,9 @@ select {
 
 .list {
   font-size: 1.5em;
+}
+.list li {
+  display: block;
 }
 
 .container-bis {

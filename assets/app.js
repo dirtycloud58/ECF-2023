@@ -7,6 +7,22 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import "./styles/app.scss";
-console.log("hello webpack");
-// start the Stimulus application
-//import "./bootstrap";
+// require jQuery normally
+const $ = require("jquery");
+//import $ from "jquery";
+global.$ = global.jQuery = $;
+
+// dynamique navbar
+let navSvg = document.getElementById("menu_toggle");
+let nav = document.getElementById("divNav");
+
+function navClick() {
+  if (nav.classList == "navigation_none") {
+    nav.classList.add("navigation");
+    nav.classList.remove("navigation_none");
+  } else {
+    nav.classList.add("navigation_none");
+    nav.classList.remove("navigation");
+  }
+}
+navSvg.addEventListener("click", navClick);

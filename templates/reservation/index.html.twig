@@ -4,30 +4,249 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Réservation</h1>
-	{% if is_granted("ROLE_USER") %}
-		{% else %}
-			<a href="{{path('app_login')}}">Me connecter</a>
-	{% endif %}
+	<div class="container">
+		{% for place in places %}
+			<span id="hidden-noon">{{place.guestsNoon}}</span>
+			<span id="hidden-evening">{{place.guestsEvening}}</span>
+		{% endfor %}
+
+		<h1>Réservation</h1>
+		{{ form_start(reservationForm) }}
+
+		<div class="form-group">
+			{{ form_label(reservationForm.email) }}
+			{{ form_widget(reservationForm.email) }}
+		</div>
+		<div class="form-select">
+			{{ form_label(reservationForm.guests) }}
+			{{ form_widget(reservationForm.guests) }}
+		</div>
+		<div class="form-select">
+			{{ form_label(reservationForm.date) }}
+			{{ form_widget(reservationForm.date) }}
+		</div>
+
+		<div class="form-select">
+			{{ form_label(reservationForm.hour) }}
+			{{ form_widget(reservationForm.hour) }}
+		</div>
+		<div class="place">
+			<p>nombre de place restante</p>
+			<p id="p-noon">Midi:
+				<span id="noon"></span>
+			</p>
+
+			<p id="p-evening">Soir:
+				<span id="evening"></span>
+			</p>
+		</div>
+		<div class="form-group">
+			{{ form_label(reservationForm.allergies) }}
+			{{ form_widget(reservationForm.allergies) }}
+		</div>
+
+		<div class="btn">
+			<button type="submit" id="submit">Réserver</button>
+		</div>
+		{{ form_end(reservationForm) }}
 
 
-	{{ form_start(reservationForm) }}
-	<div class="form-group">
-		{{ form_label(reservationForm.email) }}
-		{{ form_widget(reservationForm.email) }}
-	</div>
-	<div class="form-group">
-		{{ form_label(reservationForm.guests) }}
-		{{ form_widget(reservationForm.guests) }}
-	</div>
-	<div class="form-group">
-		{{ form_label(reservationForm.allergies) }}
-		{{ form_widget(reservationForm.allergies) }}
-	</div>
+		<div class="connect">
+			{% if is_granted("ROLE_USER") %}
+				{% else %}
+					<a href="{{path('app_login')}}">Me connecter</a>
+			{% endif %}
+		</div>
 
-	{{ form_row(reservationForm.date) }}
-	{{ form_row(reservationForm.hour) }}
-	<button type="submit" class="btn">Réserver</button>
-	{{ form_end(reservationForm) }}
 
-{% endblock %}
+	{% endblock %}
+
+	{% block javascripts %}
+		<script>
+			document.getElementById('reservation_date').addEventListener('change', function () {
+document.querySelector('.place').style.display = 'flex';
+document.querySelector('.form-select:nth-of-type(4)').style.display = 'flex';
+
+});
+		</script>
+		<script>
+			$(document).ready(function () {
+var timeSelect = $('#reservation_hour');
+var dateField = $('#reservation_date');
+
+dateField.change(function () {
+timeSelect.show();
+var date = $(this).val();
+// timeSelect.find('option').remove();
+// Envoyez une requête AJAX pour récupérer les options d'heure
+$.ajax({
+type: 'GET',
+url: `/reservation/hours?date=${date}`,
+dataType: 'json',
+success: function (data) {
+var morningHours = [];
+var eveningHours = [];
+var morningHoursExists = false; // Variable pour vérifier si des heures existent pour le midi
+var eveningHoursExists = false;
+$.each(data, function (key, value) {
+var hour = parseInt(value.substring(0, 2));
+if (hour >= 8 && hour < 16) {
+morningHours.push(value);
+morningHoursExists = true;
+} else {
+eveningHours.push(value);
+eveningHoursExists = true;
+}
+});
+morningHours.sort();
+eveningHours.sort();
+if (! morningHoursExists) {
+morningHours.push('Fermé');
+}
+
+// Vérifier si des heures existent pour le soir
+if (! eveningHoursExists || (eveningHours.length === 1 && eveningHours[0] === '00:00')) {
+eveningHours = ['Fermé'];
+}
+if (morningHours.length > 5) {
+morningHours.splice(-4);
+}
+if (eveningHours.length > 5) {
+eveningHours.splice(-4);
+}
+var options = '<optgroup label="Midi">';
+$.each(morningHours, function (key, value) {
+options += '<option value="' + value + '">' + value + '</option>';
+});
+options += '</optgroup><optgroup label="Soir">';
+$.each(eveningHours, function (key, value) {
+options += '<option value="' + value + '">' + value + '</option>';
+});
+options += '</optgroup>';
+timeSelect.empty().append(options);
+
+
+if (morningHours[0] === 'Fermé') {
+$('#p-noon').css('display', 'none');
+} else {
+$('#p-noon').css('display', 'flex');
+}
+if (eveningHours[0] === 'Fermé') {
+$('#p-evening').css('display', 'none');
+} else {
+$('#p-evening').css('display', 'flex');
+}
+if (morningHours[0] === 'Fermé' && eveningHours[0] === 'Fermé') {
+$('.place').css('display', 'none');
+} else {
+$('.place').css('display', 'flex');
+}
+},
+error: function () {
+swal('Error', 'Une erreur est survenue', 'error');
+}
+});
+});
+});
+		</script>
+		<script>
+			$(document).ready(function () {
+var dateField = $('#reservation_date');
+var noonMaxGuests = parseInt($('#hidden-noon').text());
+var eveningMaxGuests = parseInt($('#hidden-evening').text());
+var submitButton = $('#submit');
+
+
+function checkReservationButton() {
+var reservationGuests = parseInt($('#reservation_guests').val());
+var noonGuests = parseInt($('#noon').text());
+var eveningGuests = parseInt($('#evening').text());
+var reservationHour = $('#reservation_hour').val();
+
+if (reservationHour === 'Fermé') {
+submitButton.hide(); // Cacher le bouton de soumission
+return; // Sortir de la fonction
+}
+if (reservationHour && reservationHour !== '') {
+
+var hour = parseInt(reservationHour.substring(0, 2));
+
+var isNoon = hour >= 8 && hour < 16;
+var isEvening = hour >= 16 || hour < 8;
+
+if (isNoon) {
+if (noonGuests - reservationGuests < 0) {
+submitButton.hide();
+} else {
+submitButton.show();
+}
+}
+
+if (isEvening) {
+if (eveningGuests - reservationGuests < 0) {
+submitButton.hide();
+} else {
+submitButton.show();
+}
+}
+} else {
+submitButton.show();
+}
+}
+
+dateField.change(function () {
+var date = $(this).val();
+$.ajax({
+type: 'GET',
+url: `/reservation/place?date=${date}`,
+dataType: 'json',
+success: function (data) {
+noonMaxGuests = parseInt($('#hidden-noon').text()) - data[0];
+eveningMaxGuests = parseInt($('#hidden-evening').text()) - data[1];
+$('#noon').text(noonMaxGuests);
+$('#evening').text(eveningMaxGuests);
+
+checkReservationButton();
+},
+error: function () {
+swal('Error', 'Une erreur est survenue', 'error');
+}
+});
+});
+
+
+$('#reservation_guests').on('input', function () {
+checkReservationButton();
+});
+$('#reservation_hour').on('input', function () {
+checkReservationButton();
+});
+});
+		</script>
+
+		<script>
+			// dynamique navbar
+let navSvg = document.getElementById("menu_toggle");
+let nav = document.getElementById("divNav");
+
+function navClick() {
+if (nav.classList == "navigation_none") {
+nav.classList.add("navigation");
+nav.classList.remove("navigation_none");
+} else {
+nav.classList.add("navigation_none");
+nav.classList.remove("navigation");
+}
+
+}
+navSvg.addEventListener("click", navClick);
+		</script>
+
+		<script>
+			$(document).ready(function () {
+$('.selectAllergys').select2({});
+
+});
+		</script>
+
+	{% endblock %}

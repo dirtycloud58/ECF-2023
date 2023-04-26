@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}modification de profil
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+
+		<h1>Votre profil</h1>
+		<div class="profile">
+
+			<div class="btn">
+				<button>
+					<a href={{path('app_modification_mdp')}}>Modifier le mot de passe</a>
+				</button>
+			</div>
+
+			{{form_start(editProfile)}}
+			<div class="form-group">
+				{{ form_label(editProfile.guests) }}
+				{{ form_widget(editProfile.guests) }}
+			</div>
+			<div class="form-group">
+				{{ form_label(editProfile.allergies) }}
+				{{ form_widget(editProfile.allergies) }}
+			</div>
+			<div class="btn">
+				<button type="submit" class="btn">Modifier</button>
+			</div>
+			{{form_end(editProfile)}}
+		</div>
+		<div class="btn">
+			<button>
+				<a href={{path('app_profile')}}>retour</a>
+			</button>
+		</div>
+	{% endblock %}
+	{% block javascripts %}
+
+		<script>
+			$(document).ready(function () {
+$('.selectAllergys').select2({});
+
+});
+		</script>
+		<script>
+			let navSvg = document.getElementById("menu_toggle");
+let nav = document.getElementById("divNav");
+
+function navClick() {
+if (nav.classList == "navigation_none") {
+nav.classList.add("navigation");
+nav.classList.remove("navigation_none");
+} else {
+nav.classList.add("navigation_none");
+nav.classList.remove("navigation");
+}
+
+}
+navSvg.addEventListener("click", navClick);
+		</script>
+	{% endblock %}

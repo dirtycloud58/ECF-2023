@@ -13,7 +13,7 @@ class Formule
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $annotation = null;
 
     #[ORM\Column(length: 255)]

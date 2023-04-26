@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}modification de profil
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1>Votre profil</h1>
+		<div class="profile">
+			<form method="post" id="editPasswordForm">
+				<p>Attention le mot de passe doit contenir au minimum 6 caractères</p>
+			</br>
+			<div class="form-group">
+				<label for="pass">nouveau mot de passe</label>
+				<input type="password" id="pass" name="pass">
+			</div>
+			<div class="form-group">
+				<label for="pass2">confirmer mot de passe</label>
+				<input type="password" id="pass2" name="pass2">
+			</div>
+			<div class="btn">
+				<button type="submit" id="modifBtn" onclick="return validateForm()">
+					Modifier
+				</button>
+			</div>
+		</form>
+		<div class="btn">
+			<button>
+				<a href={{path('app_profile')}}>retour</a>
+			</button>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		$(document).ready(function () {
+$("#modifBtn").click(function (event) {
+event.preventDefault(); // Empêcher le comportement par défaut du bouton de soumission du formulaire
+
+var pass = $("#pass").val();
+var pass2 = $("#pass2").val();
+
+if (pass === pass2 && pass.length > 5) {
+$("#editPasswordForm").submit(); // Soumettre le formulaire si les mots de passe sont identiques
+} else {
+swal("Erreur", "Les deux mots de passe ne sont pas identiques ou ne respectent pas la longueur minimale de 6 caractères.", "error"); // Afficher un message d'erreur avec SweetAlert
+}
+});
+});
+	</script>
+	<script>
+		let navSvg = document.getElementById("menu_toggle");
+let nav = document.getElementById("divNav");
+
+function navClick() {
+if (nav.classList == "navigation_none") {
+nav.classList.add("navigation");
+nav.classList.remove("navigation_none");
+} else {
+nav.classList.add("navigation_none");
+nav.classList.remove("navigation");
+}
+
+}
+navSvg.addEventListener("click", navClick);
+	</script>
+{% endblock %}

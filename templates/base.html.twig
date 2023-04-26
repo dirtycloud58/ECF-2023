@@ -2,34 +2,31 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>
 			{% block title %}Bienvenue au Quai Antique
 			{% endblock %}
 		</title>
-
+		<link rel="stylesheet" href="https://fonts.cdnfonts.com/css/times-new-roman"/>
+		<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pinyon+Script"/>
 		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-		<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css" rel="stylesheet"/>
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
 		{% endblock %}
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-
-		<body>
-			{% include 'base/nav.html.twig' %}
-			{% block body %}{% endblock %}
-			{% include 'base/footer.html.twig' %}
-
-		</body>
-		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-			<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-			<script>
-				$(function () {
-$('.selectAllergys').select2({});
-})
-			</script>
-
-		{% endblock %}
 	</head>
+
+	<body>
+		{% include 'base/nav.html.twig' %}
+		{% block body %}{% endblock %}
+		{% include 'base/footer.html.twig' %}
+
+	</body>
+	{% block javascripts %}
+		{{ encore_entry_script_tags('app') }}
+	{% endblock %}
 </html>

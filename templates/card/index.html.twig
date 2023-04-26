@@ -4,28 +4,41 @@
 {% endblock %}
 
 {% block body %}
-	<h1>La carte</h1>
-	{% for category in categorys %}
-		<h2>{{category.title}}</h2>
-		{% for meal in category.meals %}
-			<p>{{meal.description}}
-				{{meal.price}}
-				€</p>
-		{% endfor %}
-	{% endfor %}
+	<div class="container">
+		<div class="card">
+			<h1>La carte</h1>
+			{% for category in categorys %}
+				<h2>{{category.title}}</h2>
+				{% for meal in category.meals %}
+					<div class="category">
+						<p>{{meal.description}}
+							{{meal.price}}
+							€</p>
+					</div>
 
-	<h1>Menu</h1>
-	{% for menu in menus %}
-		<h2>{{ menu.name }}</h2>
-		{% for formule in menu.formules %}
-			<h3>{{ formule.title }}
-			</h3>
-			<p>{{ formule.annotation }}</p>
-			<p>{{ formule.description }}
-				{{ formule.price }}
-				€</p><br>
-		{% endfor %}
-	{% endfor %}
+				{% endfor %}
+			{% endfor %}
 
+			<h1>Menu</h1>
+			{% for menu in menus %}
+				<h2>{{ menu.name }}</h2>
+				{% for formule in menu.formules %}
+					<h3>{{ formule.title }}
+					</h3>
+					<div class="formule">
+						<p>{{ formule.annotation }}</p>
+						<p>{{ formule.description }}
+							{{ formule.price }}
+							€</p><br>
+					</div>
 
+				{% endfor %}
+			{% endfor %}
+		</div>
+		<div class="btn">
+			<button>
+				<a href="{{path('app_reservation')}}">Réservation</a>
+			</button>
+		</div>
+	</div>
 {% endblock %}

@@ -55,9 +55,6 @@ class Galery
     public function setImageFile(File $file = null)
     {
         $this->imageFile = $file;
-        if ($file) {
-            $this->createAt = new \DateTime('now');
-        }
     }
     public function getImageFile()
     {
@@ -65,19 +62,4 @@ class Galery
     }
     #[Vich\UploadableField(mapping: "images", fileNameProperty: "file")]
     private $imageFile;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createAt = null;
-
-    public function getCreateAt(): ?\DateTimeInterface
-    {
-        return $this->createAt;
-    }
-
-    public function setCreateAt(\DateTimeInterface $createAt): self
-    {
-        $this->createAt = $createAt;
-
-        return $this;
-    }
 }

@@ -13,36 +13,40 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('guests')
-            ->add('email')
+            ->add('email', EmailType::class)
+            ->add('guests', ChoiceType::class, [
+                'choices' => array_combine(range(1, 18), range(1, 18))
+            ])
             ->add('allergies', EntityType::class, [
                 'class' => Allergy::class,
                 'multiple' => true,
+                'required' => false,
                 'choice_label' => 'name',
                 'by_reference' => false,
                 'attr' => [
                     'class' => 'selectAllergys'
                 ]
             ])
+
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'vous acceptez les conditions',
                     ]),
                 ],
                 'label' => 'J\'accepte les conditions d\'utilisation'
             ])
 
             ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'label' => 'Mot de passe',
                 'attr' => ['autocomplete' => 'new-password'],
@@ -52,8 +56,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],

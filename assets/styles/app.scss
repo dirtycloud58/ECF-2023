@@ -1,107 +1,509 @@
+@import "./config/config";
+@import "./cdn/selector";
+
 * {
   margin: 0;
   padding: 0;
 }
+
 body {
-  background-color: lightgray;
+  background-color: white;
   max-width: 100%;
   max-height: 100%;
+  font-size: 16px;
 }
+
+h1,
+h2,
+h3,
+thead {
+  font-family: $font1;
+  padding: 2%;
+  justify-content: center;
+  align-items: center;
+}
+
+h1,
+thead {
+  font-size: 4em;
+}
+h2 {
+  font-size: 3em;
+}
+h3 {
+  font-size: 2em;
+}
+
+h1,
+h2,
+h3 {
+  display: flex;
+}
+
+p,
+tbody,
+label,
+input,
+select {
+  font-family: $font2;
+  font-size: 1.5em;
+}
+
 ul {
+  max-height: 40vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
   align-items: center;
-  justify-content: end;
-  padding-right: 2%;
+  justify-content: center;
 }
+
 li {
   display: flex;
-  list-style-type: none;
-  flex-direction: row;
-  padding-left: 3%;
+  justify-content: center;
+  width: 100vw;
+  a {
+    font-size: 1.5em;
+  }
 }
+
 a {
+  font-family: $font2;
+  color: white;
   outline: none;
+  font-weight: 500;
   text-decoration: none;
 }
 
+button {
+  min-width: 5vw;
+  margin: 5%;
+  padding: 3%;
+  background-color: $color2;
+  color: white;
+  font-size: 2em;
+  border: none;
+  border-radius: 25px;
+  text-shadow: 3px 2px 8px $color1;
+  border: 2px solid transparent;
+  &:hover {
+    cursor: pointer;
+    border: 2px solid $color4;
+  }
+}
+
+nav {
+  ul {
+    border-radius: 0 0 15% 15%;
+    background-color: $color3;
+  }
+  li {
+    padding: 1%;
+  }
+}
+.reservation {
+  background-color: white;
+  a {
+    color: $color4;
+    font-weight: 600;
+  }
+}
 // homepage
 .container {
   width: 100vw;
-  height: auto;
+  min-height: 40vh;
+  padding-top: 10vh;
 }
-.image-home {
-  height: 90vh;
 
-  background-image: url(/public/img/restaurant.jpg);
+.connect {
+  display: flex;
+  justify-content: center;
+  padding: 2% 0 2% 0;
+  a {
+    color: $color4;
+    font-size: 2em;
+    border-bottom: 1px solid $color2;
+  }
+}
+
+.image-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  background-image: url("/public/img/restaurant.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  h1 {
+    color: white;
+  }
 }
+// acceuil img
+.accueil {
+  width: 80vw;
+  margin: 0 auto;
+  padding-bottom: 2%;
+}
+
 .galeries {
   display: flex;
+  position: relative;
+  align-items: center;
   justify-content: center;
+  h3 {
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    color: transparent;
+    &:hover {
+      color: white;
+      text-shadow: -2px -4px 6px rgba(235, 162, 55, 0.79);
+      backdrop-filter: blur(4px);
+    }
+  }
 }
+
 .galeries-img {
-  padding: 1%;
-  width: 50vw;
+  padding: 2%;
+  width: 80vw;
   height: auto;
 }
 
 //navbar
 .navbar {
   display: flex;
-  flex-direction: row;
-  width: 100%;
+  position: fixed;
+  background: white;
+  width: 100vw;
   height: 10vh;
-  background-color: white;
+  z-index: 5;
 }
-.logo {
+
+.nav_menu {
+  width: 75vw;
   display: flex;
-  justify-content: center;
-  width: 20vw;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  label {
+    width: 10vw;
+  }
+}
+.burger {
+  width: 100%;
+  border-radius: 25%;
+  margin: auto;
+  background-color: $color4;
+}
+.nav_label {
+  display: flex;
   height: 10vh;
-  align-items: center;
+  padding-right: 5vw;
+  cursor: pointer;
   img {
-    height: 8vh;
+    &:focus,
+    &:hover {
+      animation: wobble 2s;
+    }
+
+    @keyframes wobble {
+      20% {
+        transform: rotate(45deg);
+      }
+      40% {
+        transform: rotate(-45deg);
+      }
+      60% {
+        transform: rotate(45deg);
+      }
+      80% {
+        transform: rotate(-45deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
   }
 }
 
+.logo {
+  width: 25vw;
+  img {
+    padding-top: 2vh;
+    padding-left: 5%;
+    height: 7vh;
+  }
+}
+
+#menu_toggle {
+  display: none;
+}
+
 .navigation {
+  border-radius: 0 0 25% 25%;
   display: flex;
+  background-color: white;
+  flex-direction: row;
   flex-wrap: wrap;
-  width: 80vw;
 }
+
+.navigation_none {
+  display: none;
+  width: 100vw;
+}
+
+//footer
+
 .footer {
+  min-height: 50vh;
+  width: 100%;
+  flex-direction: column;
   display: flex;
+  background-color: $color3;
 }
-h1 {
-  font-size: 3em;
+
+.hour {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 form {
-  width: 80vw;
+  width: 90vw;
+  margin: 0 auto;
+  padding: 5% 0 5% 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-label {
-  width: 10vw;
-}
-input {
-  width: 70vw;
-  cursor: pointer;
-}
+
+input,
+select,
 .selectAllergys {
-  width: 70vw;
+  width: 80vw;
+}
+
+input,
+.selectAllergys,
+select {
   cursor: pointer;
+  border: 2px solid $color1;
+  border-radius: 5px;
+  padding: 1% 0 1% 0;
 }
 
 .form-group {
   display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  label {
+    margin: 1% 0 1% 0;
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: row;
   justify-content: space-around;
+}
+
+.form-select {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  label,
+  input,
+  select {
+    min-width: 20vw;
+    margin: 1% 0 1% 0;
+  }
+}
+.form-select:nth-of-type(4) {
+  display: none;
+}
+.form-checkbox {
+  display: flex;
+  margin: 0 auto;
+  flex-direction: row;
+  label {
+    width: 70vw;
+    margin: 1% 0 1% 0;
+  }
+  input {
+    width: 10vw;
+    margin: 1% 0 1% 0;
+  }
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.category,
+.formule {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  h1 {
+    color: $color4;
+  }
+  h3 {
+    color: $color3;
+  }
+  p {
+    text-align: center;
+  }
+}
+
+.profile {
+  text-align: center;
+  li {
+    font-size: 1.5em;
+  }
+  ul {
+    height: auto;
+  }
+  table {
+    width: 80vw;
+    margin: 0 auto;
+    border-radius: 25px;
+    border-collapse: collapse;
+  }
+  tr {
+    width: 30vw;
+  }
+  th,
+  td {
+    border: 1px solid black;
+  }
+  th {
+    background-color: $color1;
+  }
+  thead {
+    font-size: 2em;
+  }
+}
+
+.allergies {
+  background-color: $color1;
+}
+
+.info {
+  border-top: 2px solid $color3;
+  width: 80vw;
+  text-align: center;
+  margin: auto;
+  padding-top: 2%;
+}
+
+.vide {
+  height: 2vh;
+}
+.list {
+  font-size: 1.5em;
+}
+.container-bis {
+  width: 80%;
+  margin: 0 auto;
+  padding-bottom: 2%;
+  a {
+    color: $color1;
+  }
+}
+.container-galery {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+}
+.datepicker {
+  padding: 0 !important;
+}
+.place {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#hidden-noon,
+#hidden-evening {
+  display: none;
+}
+@media screen and (min-width: 760px) {
+  body {
+    font-size: 12px;
+  }
+  .nav_menu {
+    flex-wrap: nowrap;
+  }
+  .navbar {
+    label {
+      display: none;
+    }
+  }
+  .nav_label {
+    img {
+      display: none;
+    }
+  }
+  .navigation_none {
+    display: flex;
+  }
+  nav {
+    ul {
+      width: 75vw;
+      height: 10vh;
+      background-color: transparent;
+    }
+    li {
+      width: auto;
+      padding-left: 2%;
+    }
+    a {
+      color: black;
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  body {
+    font-size: 20px;
+  }
+  .container-galery {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .galeries-img {
+    width: 30vw;
+  }
+
+  .form-group,
+  .form-checkbox,
+  .selectAllergys {
+    width: 30vw;
+  }
+
+  .group {
+    flex-direction: column;
+  }
+
+  button {
+    margin: 1%;
+    padding: 1%;
+  }
+  input,
+  select {
+    width: auto;
+  }
 }

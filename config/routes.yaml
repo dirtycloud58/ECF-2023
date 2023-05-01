@@ -4,3 +4,6 @@ controllers:
 app_hours:
   path: /reservation/hours
   controller: App\Controller\ReservationController::hours
+app_reservations_du_jour:
+  path: /reservations-du-jour
+  controller: App\Controller\Admin\DashboardController::reservationsDuJour

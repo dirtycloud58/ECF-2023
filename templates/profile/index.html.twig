@@ -2,7 +2,9 @@
 
 {% block title %}profil utilisateur
 {% endblock %}
-
+{% block meta %}
+	<meta name="description" content="compte">
+{% endblock %}
 {% block body %}
 	<div class="container">
 
@@ -81,20 +83,5 @@ button: true,
 timer: 3000
 });{% endfor %}
 		</script>
-		<script>
-			let navSvg = document.getElementById("menu_toggle");
-let nav = document.getElementById("divNav");
-
-function navClick() {
-if (nav.classList == "navigation_none") {
-nav.classList.add("navigation");
-nav.classList.remove("navigation_none");
-} else {
-nav.classList.add("navigation_none");
-nav.classList.remove("navigation");
-}
-
-}
-navSvg.addEventListener("click", navClick);
-		</script>
+		{{ encore_entry_script_tags('navigation') }}
 	{% endblock %}

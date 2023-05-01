@@ -10,6 +10,7 @@ use App\Form\ReservationType;
 use App\Repository\HourRepository;
 use App\Repository\PlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -121,21 +122,25 @@ class ReservationController extends AbstractController
         $reservation = new Reservation();
         $user = $this->getUser();
         if ($user) {
+            // Créez une copie des allergies de l'utilisateur, cela ne modifiera pas les données initiales
+            $allergies = new ArrayCollection();
+            foreach ($this->getUser()->getAllergies() as $allergy) {
+                $allergies->add($allergy);
+            }
             $reservation
                 ->setEmail($this->getUser()->getEmail())
                 ->setGuests($this->getUser()->getGuests())
-                ->addAllergies($this->getUser()->getAllergies());
+                ->addAllergies($allergies);
         }
 
         $reservationForm = $this->createForm(ReservationType::class, $reservation, [
             'openingHours' => $openingHours
         ]);
 
-        // Récupérez les heures sélectionnées à partir de la requête
+
         $reservationForm->handleRequest($request);
 
 
-        // traitement du formulaire
         if ($reservationForm->isSubmitted() && $reservationForm->isValid()) {
 
             $entityManager->persist($reservation);

@@ -7,21 +7,33 @@ use App\Entity\Allergy;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'label' => 'Adresse email',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez saisir votre adresse email',
+                    ]),
+                    new Email([
+                        'mode' => 'html5',
+                        'message' => 'Adresse email invalide',
+                    ]),
+                ],
+            ])
             ->add('guests', ChoiceType::class, [
                 'choices' => array_combine(range(1, 18), range(1, 18))
             ])
@@ -52,11 +64,13 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'veuillez saisir votre mot de passe',
+                        'message' => 'Veuillez saisir votre mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'max' => 4096,
+                        'max' => 20,
+                        'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Le mot de passe ne peut pas contenir plus de {{ limit }} caractères',
                     ]),
                 ],
             ]);

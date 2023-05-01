@@ -11,18 +11,3 @@ import "./styles/app.scss";
 const $ = require("jquery");
 //import $ from "jquery";
 global.$ = global.jQuery = $;
-
-// dynamique navbar
-let navSvg = document.getElementById("menu_toggle");
-let nav = document.getElementById("divNav");
-
-function navClick() {
-  if (nav.classList == "navigation_none") {
-    nav.classList.add("navigation");
-    nav.classList.remove("navigation_none");
-  } else {
-    nav.classList.add("navigation_none");
-    nav.classList.remove("navigation");
-  }
-}
-navSvg.addEventListener("click", navClick);

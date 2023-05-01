@@ -2,21 +2,22 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Category;
-use App\Entity\Galery;
 use App\Entity\Hour;
-use App\Entity\Menu;
 use App\Entity\Meal;
-use App\Entity\Formule;
-use App\Entity\Reservation;
+use App\Entity\Menu;
 use App\Entity\Place;
-
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use App\Entity\Galery;
+use App\Entity\Formule;
+use App\Entity\Category;
+use App\Entity\Reservation;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -43,6 +44,9 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+
+        yield MenuItem::linkToUrl('Réservations du jour', 'fa fa-ticket', $this->generateUrl('reservations_du_jour'));
+
         yield MenuItem::linkToCrud('Galerie', 'fas fa-solid fa-image', Galery::class);
         yield MenuItem::linkToCrud('Horaire', 'fas fa-solid fa-clock', Hour::class);
         yield MenuItem::linkToCrud('Menu', 'fas fa-solid fa-bars', Menu::class);
@@ -51,5 +55,15 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Plat', 'fas fa-solid fa-plate-wheat', Meal::class);
         yield MenuItem::linkToCrud('Reservation', 'fa-solid fa-ticket', Reservation::class);
         yield MenuItem::linkToCrud('place', 'fa-solid fa-arrow-down-1-9', place::class);
+    }
+    #[Route('/admin/reservations-du-jour', name: 'reservations_du_jour')]
+    public function reservationsDuJour(EntityManagerInterface $entity): Response
+    {
+        $reservations = $entity->getRepository(Reservation::class)
+            ->findBy(['date' => new \DateTime('today')], ['hour' => 'ASC']);
+
+        return $this->render('Admin/reservations_du_jour.html.twig', [
+            'reservations' => $reservations,
+        ]);
     }
 }

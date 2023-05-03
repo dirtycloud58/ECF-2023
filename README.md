@@ -20,6 +20,9 @@ vitrine pour le Quai Antique avec ce goût de la qualité que recherche Arnaud M
 - Composer
 - MySQL
 - Symfony CLI
+- Node Js
+- php Intl
+- yarn
 
 ## Installation
 
@@ -27,9 +30,11 @@ vitrine pour le Quai Antique avec ce goût de la qualité que recherche Arnaud M
 2. Installez les dépendances : composer install
 3. Créez la base de données : php bin/console doctrine:database:create
 4. Exécutez les migrations : php bin/console doctrine:migrations:migrate
-5. Chargez les fixtures dans votre terminal : mysql -u username database_name < path/nom_de_la_fixture.sql
-   (Attention à bien modifier votre username et le nom de la base de données et d’inclure la route du fichier sql, les fichiers se trouvent dans le dossier fixtures)
-6. Lancez le serveur : "symfony serve" ou "symfony server:start"
+5. Chargez les fixtures dans votre terminal : mysql -u username database_name < path/fixtures.sql
+   (Attention à bien modifier votre username et le nom de la base de données et d’inclure la route du fichier sql, les fichiers se trouvent dans le dossier documents)
+6. commande : yarn install
+7. commande : yarn encore dev
+8. Lancez le serveur : "symfony serve" ou "symfony server:start"
    Le projet sera accessible à l'adresse `http://localhost:8000/`.
 
 ## création d'un admin :

@@ -6,9 +6,9 @@
 	<meta name="description" content="Page de connexion">
 {% endblock %}
 {% block body %}
-	<div class="container">
+	<div class="container connexion">
 
-		<form method="post">
+		<form method="post" name="connexion">
 			{% if error %}
 				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 			{% endif %}

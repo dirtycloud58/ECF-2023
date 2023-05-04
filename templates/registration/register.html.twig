@@ -6,11 +6,11 @@
 	<meta name="description" content="inscription au restaurant Quai Antique">
 {% endblock %}
 {% block body %}
-	<div class="container">
-		<h1>Inscription</h1>
+	<div class="container inscription">
+
 
 		{{ form_start(registrationForm) }}
-
+		<h1>Inscription</h1>
 		<div class="form-group">
 			{{ form_label(registrationForm.email) }}
 			{{ form_widget(registrationForm.email) }}
@@ -37,11 +37,11 @@
 		<div class="btn">
 			<button type="submit">M'inscrire</button>
 		</div>
-
-		{{ form_end(registrationForm) }}
 		<div class="connect">
 			<a href="{{path('app_login')}}">Me connecter</a>
 		</div>
+		{{ form_end(registrationForm) }}
+
 
 	</div>
 {% endblock %}

@@ -6,15 +6,15 @@
 	<meta name="description" content="page de réservation au restaurant Quai Antique">
 {% endblock %}
 {% block body %}
-	<div class="container">
+	<div class="container resa">
 		{% for place in places %}
 			<span id="hidden-noon">{{place.guestsNoon}}</span>
 			<span id="hidden-evening">{{place.guestsEvening}}</span>
 		{% endfor %}
 
-		<h1>Réservation</h1>
-		{{ form_start(reservationForm) }}
 
+		{{ form_start(reservationForm) }}
+		<h1>Réservation</h1>
 		<div class="form-group">
 			{{ form_label(reservationForm.email) }}
 			{{ form_widget(reservationForm.email) }}
@@ -50,28 +50,26 @@
 		<div class="btn">
 			<button type="submit" id="submit">Réserver</button>
 		</div>
-		{{ form_end(reservationForm) }}
-
-
 		<div class="connect">
 			{% if is_granted("ROLE_USER") %}
 				{% else %}
 					<a href="{{path('app_login')}}">Me connecter</a>
 			{% endif %}
 		</div>
+		{{ form_end(reservationForm) }}
 
-
-	{% endblock %}
-	{% block javascripts %}
-		{{ encore_entry_script_tags('reservation') }}
-		{{ encore_entry_script_tags('reservationHours') }}
-		{{ encore_entry_script_tags('reservationDefault') }}
-		{{ encore_entry_script_tags('navigation') }}
-		<script type="text/javascript">
-			$(document).ready(function () {
+	</div>
+{% endblock %}
+{% block javascripts %}
+	{{ encore_entry_script_tags('reservation') }}
+	{{ encore_entry_script_tags('reservationHours') }}
+	{{ encore_entry_script_tags('reservationDefault') }}
+	{{ encore_entry_script_tags('navigation') }}
+	<script type="text/javascript">
+		$(document).ready(function () {
 $('.selectAllergys').select2({});
 
 });
-		</script>
+	</script>
 
-	{% endblock %}
+{% endblock %}

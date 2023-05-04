@@ -14,11 +14,16 @@
 		</div>
 		<div class="accueil">
 			<h1>Bienvenue</h1>
-			<p>Le restaurant Au quai Antique est situé sur les rives de la Bretagne.
-				<br>
-				Le Chef vous propose une cuisine de saison et quelques savoureuses spécialités iodées, plateaux de fruits de mer,poissons des côtes et des rivières, coquillages… Le tout préparé maison.
-			</p>
-			<p>Nous vous présentons nos trois plats du moment.</p>
+			<p>Bienvenue au restaurant Quai Antique, situé en plein cœur de Chambéry ! Notre chef, originaire de Bretagne, est passionné par la cuisine et les produits de la mer.<br>
+				Il met tout son savoir-faire pour créer des plats innovants et délicieux qui marient les saveurs locales et les produits de la mer.<br>
+				Nous sommes fiers de proposer une cuisine raffinée et créative, élaborée à partir d'ingrédients frais et locaux. Notre menu est conçu pour satisfaire toutes les papilles, des plats classiques aux créations plus audacieuses.<br>
+				Chez nous, vous pourrez déguster des fruits de mer fraîchement pêchés, tels que des huîtres, des moules et du poisson grillé. Nous proposons également des plats de viande savoureux, ainsi que des options végétariennes et véganes pour ceux qui le souhaitent.<br>
+				Notre équipe professionnelle et attentionnée est à votre service pour vous offrir une expérience culinaire inoubliable. Nous sommes impatients de vous accueillir au restaurant Quai Antique pour vous faire découvrir notre passion pour la cuisine et les saveurs de la mer et de la terre.</p><br>
+		</div>
+		<div class="accueil-plats">
+			<h2>Les plats phares</h2>
+			<p>Nous sommes ravis de vous présenter nos trois plats phares du moment ! Chez nous, chaque saison apporte de nouvelles inspirations culinaires, avec des ingrédients frais et de qualité pour des plats toujours plus savoureux.</p>
+
 		</div>
 		<div class="container-galery">
 			{% for galery in galerys %}
@@ -28,8 +33,49 @@
 				</div>
 			{% endfor %}
 		</div>
-
-
+		<div class="btn">
+			<button>
+				<a href="{{path('app_reservation')}}">Réservation</a>
+			</button>
+		</div>
+		<div class="avis">
+			<h2>Avis</h2>
+			<div class="avis-flex">
+				<div class="people">
+					<h3>Leonardo</h3>
+					<div class="stars">
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-regular fa-star"></i>
+						<i class="fa-regular fa-star"></i>
+					</div>
+					<p>J'ai visité ce restaurant récemment et bien que la nourriture était bonne, je n'ai pas été entièrement satisfait de l'expérience globale. Le service était un peu lent et les prix étaient un peu élevés par rapport à ce que j'ai l'habitude de payer pour un repas. Dans l'ensemble, je recommanderais ce restaurant si vous cherchez une bonne cuisine, mais je ne le considère pas comme un incontournable</p>
+				</div>
+				<div class="people">
+					<h3>Clara</h3>
+					<div class="stars">
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-regular fa-star"></i>
+					</div>
+					<p>J'ai vraiment apprécié ce restaurant ! La nourriture était excellente et le service était rapide et efficace. Les prix étaient raisonnables et je pense que c'est un excellent endroit pour une soirée décontractée avec des amis ou en famille. Je le recommande fortement !</p>
+				</div>
+				<div class="people">
+					<h3>Mathilde</h3>
+					<div class="stars">
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+						<i class="fa-solid fa-star"></i>
+					</div>
+					<p>Absolument fantastique ! Tout, de la nourriture au service, était de première classe. Les prix étaient un peu élevés, mais je pense que cela en valait vraiment la peine pour l'expérience globale. J'ai été impressionné par la variété des plats proposés et je pense que ce restaurant est un incontournable pour tout amateur de bonne cuisine. Si vous êtes dans la région, assurez-vous de réserver une table ici !</p>
+				</div>
+			</div>
+		</div>
 		<div class="btn">
 			<button>
 				<a href="{{path('app_reservation')}}">Réservation</a>

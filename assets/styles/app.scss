@@ -10,7 +10,7 @@ body {
   background-color: white;
   max-width: 100%;
   max-height: 100%;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 h1,
@@ -18,9 +18,10 @@ h2,
 h3,
 thead {
   font-family: $font1;
-  padding: 2%;
+  padding: 1% 0 1% 0;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 h1,
@@ -94,15 +95,23 @@ button {
 
 nav {
   ul {
-    border-radius: 0 0 15% 15%;
-    background-color: $color3;
+    box-sizing: border-box;
+    border-bottom: 3px solid #000;
   }
   li {
-    padding: 1%;
+    padding: 2% 0 2% 0;
+  }
+  a {
+    color: black;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+  }
+
+  a:hover {
+    border-color: $color4;
   }
 }
 .reservation {
-  background-color: white;
   a {
     color: $color4;
     font-weight: 600;
@@ -114,7 +123,9 @@ nav {
   min-height: 40vh;
   padding-top: 10vh;
 }
-
+.filter-active {
+  filter: blur(5px);
+}
 .connect {
   display: flex;
   justify-content: center;
@@ -140,7 +151,8 @@ nav {
   }
 }
 // acceuil img
-.accueil {
+.accueil,
+.accueil-plats {
   width: 80vw;
   margin: 0 auto;
   padding-bottom: 2%;
@@ -243,29 +255,44 @@ nav {
 }
 
 .navigation {
-  border-radius: 0 0 25% 25%;
   display: flex;
-  background-color: white;
   flex-direction: row;
   flex-wrap: wrap;
 }
-
+.navigation {
+  background-color: white;
+}
+.navigation-footer {
+  grid-area: nav;
+  align-items: center;
+  text-align: center;
+  h2 {
+    width: 100%;
+  }
+}
 .navigation_none {
   display: none;
   width: 100vw;
 }
 
 //footer
-
 .footer {
   min-height: 50vh;
   width: 100%;
-  flex-direction: column;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, auto);
+  grid-template-areas:
+    "hour hour"
+    "map map"
+    "nav nav"
+    "contact contact";
+  gap: 20px;
   background-color: $color3;
 }
 
 .hour {
+  grid-area: hour;
   margin-top: 5%;
   margin-bottom: 5%;
   width: 100%;
@@ -273,7 +300,20 @@ nav {
   justify-content: center;
   align-items: center;
 }
-
+#map-container {
+  grid-area: map;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  a {
+    font-size: 1.5em;
+    color: black;
+  }
+  iframe {
+    padding-top: 2%;
+  }
+}
 form {
   width: 90vw;
   margin: 0 auto;
@@ -287,24 +327,10 @@ input,
 select,
 .selectAllergys {
   width: 80vw;
-}
-
-input,
-.selectAllergys,
-select {
   cursor: pointer;
   border: 2px solid $color1;
   border-radius: 5px;
   padding: 1% 0 1% 0;
-}
-
-.form-group {
-  display: flex;
-  margin: 0 auto;
-  flex-direction: column;
-  label {
-    margin: 1% 0 1% 0;
-  }
 }
 
 .group {
@@ -313,32 +339,31 @@ select {
   justify-content: space-around;
 }
 
-.form-select {
+.form-select,
+.form-group {
   display: flex;
   margin: 0 auto;
   flex-direction: column;
   label,
   input,
   select {
-    min-width: 20vw;
     margin: 1% 0 1% 0;
   }
-}
-.form-select:nth-of-type(4) {
-  display: none;
 }
 .form-checkbox {
   display: flex;
   margin: 0 auto;
   flex-direction: row;
   label {
-    width: 70vw;
-    margin: 1% 0 1% 0;
+    width: 60vw;
+    margin: 1% 2% 1% 0;
   }
   input {
-    width: 10vw;
-    margin: 1% 0 1% 0;
+    width: 8vw;
   }
+}
+.form-select:nth-of-type(4) {
+  display: none;
 }
 
 .btn {
@@ -396,6 +421,7 @@ select {
 }
 .contact {
   display: flex;
+  grid-area: contact;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -405,7 +431,8 @@ select {
     color: black;
   }
   p {
-    padding: 2%;
+    font-size: 1em;
+    padding: 2% 0 2% 0;
     text-align: center;
     color: white;
   }
@@ -443,6 +470,10 @@ select {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
+  align-items: center;
+  p {
+    width: 80%;
+  }
 }
 .datepicker {
   padding: 0 !important;
@@ -457,9 +488,115 @@ select {
 #hidden-evening {
   display: none;
 }
-@media screen and (min-width: 760px) {
-  body {
-    font-size: 12px;
+.avis,
+.avis-flex {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+.avis {
+  h2 {
+    display: inline-block;
+    border-bottom: 2px solid $color2;
+  }
+}
+.avis {
+  background-color: $color5;
+}
+.people {
+  width: 80%;
+  height: auto;
+  padding-bottom: 2%;
+}
+.stars {
+  width: 100%;
+}
+@media screen and (min-width: 700px) {
+  .inscription {
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 1) 25%,
+        rgba(255, 255, 255, 0) 75%
+      ),
+      url("/public/img/lac.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    h1 {
+      justify-content: flex-start;
+      width: 90%;
+    }
+  }
+  .resa {
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 1) 25%,
+        rgba(255, 255, 255, 0) 75%
+      ),
+      url("/public/img/plat.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    h1 {
+      justify-content: flex-start;
+      width: 90%;
+    }
+  }
+  .connexion {
+    background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 1) 25%,
+        rgba(255, 255, 255, 0) 75%
+      ),
+      url("/public/img/table.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    h1 {
+      justify-content: flex-start;
+      width: 90%;
+    }
+  }
+  .place {
+    align-items: flex-start;
+  }
+  .connect {
+    justify-content: flex-start;
+  }
+  form {
+    padding: 0;
+  }
+  .form-group,
+  .form-checkbox,
+  .form-select {
+    margin: 0;
+  }
+
+  form[name="registration_form"] .btn,
+  form[name="reservation"] .btn,
+  form[name="connexion"] .btn {
+    justify-content: start;
+  }
+  form[name="registration_form"] button,
+  form[name="reservation"] button,
+  form[name="connexion"] button {
+    margin: 1% 1% 1% 0;
+  }
+  input,
+  select,
+  .selectAllergys {
+    width: 40%;
+  }
+  .form-checkbox {
+    flex-direction: row;
+    label {
+      width: 25vw;
+    }
+    input {
+      width: 5vw;
+    }
   }
   .nav_menu {
     flex-wrap: nowrap;
@@ -482,6 +619,7 @@ select {
       width: 75vw;
       height: 10vh;
       background-color: transparent;
+      border: none;
     }
     li {
       width: auto;
@@ -491,12 +629,38 @@ select {
       color: black;
     }
   }
+  .galeries-img {
+    width: 65vw;
+  }
+  #map-container {
+    iframe {
+      width: 75%;
+    }
+  }
+  .people {
+    width: 65vw;
+  }
 }
+
 @media screen and (min-width: 1024px) {
   body {
-    font-size: 20px;
+    font-size: 14px;
   }
-  .container-galery {
+  input,
+  select,
+  .selectAllergys {
+    width: 25%;
+  }
+  .form-checkbox {
+    label {
+      width: 15vw;
+    }
+    input {
+      width: 2vw;
+    }
+  }
+  .container-galery,
+  .avis-flex {
     flex-direction: row;
     justify-content: space-around;
   }
@@ -504,10 +668,8 @@ select {
     width: 30vw;
   }
 
-  .form-group,
-  .form-checkbox,
-  .selectAllergys {
-    width: 30vw;
+  .people {
+    width: 25vw;
   }
 
   .group {
@@ -518,8 +680,23 @@ select {
     margin: 1%;
     padding: 1%;
   }
-  input,
-  select {
-    width: auto;
+
+  .navigation-footer {
+    li {
+      width: auto;
+      margin: 0 1% 0 1%;
+    }
+  }
+  #map-container {
+    margin-top: 5%;
+  }
+  .footer {
+    grid-template-rows: repeat(4, auto);
+    grid-template-areas:
+      "hour map"
+      "hour map"
+      "nav nav"
+      "contact contact";
+    gap: 20px;
   }
 }

@@ -16,6 +16,7 @@ class EditProfileType extends AbstractType
     {
         $builder
             ->add('guests', ChoiceType::class, [
+                'label' => 'Nombre de convives',
                 'choices' => array_combine(range(1, 18), range(1, 18))
             ])
             ->add('allergies', EntityType::class, [

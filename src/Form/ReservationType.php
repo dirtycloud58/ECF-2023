@@ -7,6 +7,8 @@ use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -21,7 +23,18 @@ class ReservationType extends AbstractType
         $openingHours = $options['openingHours'];
 
         $builder
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, [
+                'label' => 'Adresse email',
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez saisir votre adresse email',
+                    ]),
+                    new Email([
+                        'mode' => 'html5',
+                        'message' => 'Adresse email invalide',
+                    ]),
+                ],
+            ])
             ->add('guests', ChoiceType::class, [
                 'label' => 'Nombre de convives',
                 'choices' => array_combine(range(1, 18), range(1, 18))

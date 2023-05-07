@@ -18,6 +18,7 @@ CREATE TABLE galery (
     id INT(10) NOT NULL AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     file VARCHAR(255) NOT NULL,
+    create_at DATETIME NOT NULL,
     PRIMARY KEY (id)
 );
 CREATE TABLE hour (
@@ -32,7 +33,7 @@ CREATE TABLE hour (
 CREATE TABLE formule (
     id INT(10) NOT NULL AUTO_INCREMENT,
     menu_id INT(10) NULL DEFAULT NULL,
-    annotation VARCHAR(255) NOT NULL,
+    annotation VARCHAR(255) NULL DEFAULT NULL,
     description VARCHAR(255) NOT NULL,
     price DOUBLE NOT NULL,
     title VARCHAR(255) NOT NULL,
@@ -80,5 +81,6 @@ CREATE TABLE reservation_allergy (
 CREATE TABLE place (
 place_id INT(10) NOT NULL,
 guests_noon INT(10) NOT NULL,
-guests_evening INT(10) NOT NULL
+guests_evening INT(10) NOT NULL,
+PRIMARY KEY (id)
 );

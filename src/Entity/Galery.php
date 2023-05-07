@@ -23,6 +23,13 @@ class Galery
     #[ORM\Column(length: 255)]
     private ?string $file = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $createAt = null;
+
+    #[Vich\UploadableField(mapping: "images", fileNameProperty: "file")]
+    private $imageFile;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -45,21 +52,35 @@ class Galery
         return $this->file;
     }
 
-    public function setFile(string $file): self
+    public function setFile(?string $file): self
     {
         $this->file = $file;
 
         return $this;
     }
 
-    public function setImageFile(File $file = null)
+    public function getCreateAt(): ?\DateTimeInterface
+    {
+        return $this->createAt;
+    }
+
+    public function setCreateAt(\DateTimeInterface $createAt): self
+    {
+        $this->createAt = $createAt;
+
+        return $this;
+    }
+
+    public function setImageFile(File $file = null): self
     {
         $this->imageFile = $file;
+        if ($file) {
+            $this->createAt = new \DateTime('now');
+        }
+        return $this;
     }
     public function getImageFile()
     {
         return $this->imageFile;
     }
-    #[Vich\UploadableField(mapping: "images", fileNameProperty: "file")]
-    private $imageFile;
 }

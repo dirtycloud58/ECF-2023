@@ -22,8 +22,9 @@ class GaleryCrudController extends AbstractCrudController
         return [
 
             TextField::new('name'),
-            textField::new('imageFile')->setFormType(VichImageType::class)->onlyOnForms(),
+            TextField::new('imageFile')->setFormType(VichImageType::class)->onlyOnForms(),
             ImageField::new('file')->setBasePath('uploads/images/')->onlyOnIndex(),
+            DateField::new('createAt'),
 
         ];
     }

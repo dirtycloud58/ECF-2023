@@ -673,7 +673,6 @@ nav a:hover {
 }
 
 .container {
-  width: 100vw;
   min-height: 40vh;
   padding-top: 10vh;
 }
@@ -977,6 +976,10 @@ select,
   font-size: 2em;
 }
 
+.suite li {
+  font-size: 1.5em;
+}
+
 .contact {
   display: flex;
   grid-area: contact;
@@ -1083,6 +1086,10 @@ select,
 }
 
 @media screen and (min-width: 700px) {
+  .accueil,
+  .accueil-plats {
+    width: 60vw;
+  }
   .inscription {
     background-image: linear-gradient(to right, rgb(255, 255, 255) 25%, rgba(255, 255, 255, 0) 75%), url("/public/img/lac.jpg");
     background-repeat: no-repeat;
@@ -1092,6 +1099,7 @@ select,
   .inscription h1 {
     justify-content: flex-start;
     width: 90%;
+    margin: 0 auto;
   }
   .resa {
     background-image: linear-gradient(to right, rgb(255, 255, 255) 25%, rgba(255, 255, 255, 0) 75%), url("/public/img/plat.jpg");
@@ -1102,6 +1110,7 @@ select,
   .resa h1 {
     justify-content: flex-start;
     width: 90%;
+    margin: 0 auto;
   }
   .connexion {
     background-image: linear-gradient(to right, rgb(255, 255, 255) 25%, rgba(255, 255, 255, 0) 75%), url("/public/img/table.jpg");
@@ -1112,12 +1121,37 @@ select,
   .connexion h1 {
     justify-content: flex-start;
     width: 90%;
+    margin: 0 auto;
+  }
+  .modification {
+    background-image: linear-gradient(to right, rgb(255, 255, 255) 25%, rgba(255, 255, 255, 0) 75%), url("/public/img/cafe.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .password {
+    background-image: linear-gradient(to right, rgb(255, 255, 255) 25%, rgba(255, 255, 255, 0) 75%), url("/public/img/bistro.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .modification .profile,
+  .password .profile {
+    text-align: justify;
+    width: 90%;
+    margin: 0 auto;
+  }
+  .modification .profile h1,
+  .password .profile h1 {
+    justify-content: flex-start;
   }
   .place {
     align-items: flex-start;
   }
   .connect {
     justify-content: flex-start;
+    width: 90%;
+    margin: 0 auto;
   }
   form {
     padding: 0;
@@ -1129,12 +1163,16 @@ select,
   }
   form[name=registration_form] .btn,
   form[name=reservation] .btn,
-  form[name=connexion] .btn {
+  form[name=connexion] .btn,
+  form[name=edit_profile] .btn,
+  .profile .btn {
     justify-content: start;
   }
   form[name=registration_form] button,
   form[name=reservation] button,
-  form[name=connexion] button {
+  form[name=connexion] button,
+  form[name=edit_profile] button,
+  .profile button {
     margin: 1% 1% 1% 0;
   }
   input,
@@ -1204,10 +1242,13 @@ select,
   .container-galery,
   .avis-flex {
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: center;
+  }
+  .galeries {
+    padding: 0 2% 0 2%;
   }
   .galeries-img {
-    width: 30vw;
+    width: 20vw;
   }
   .people {
     width: 25vw;

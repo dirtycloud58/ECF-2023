@@ -6,11 +6,11 @@
 	<meta name="description" content="modification du compte">
 {% endblock %}
 {% block body %}
-	<div class="container">
+	<div class="container modification">
 
-		<h1>Votre profil</h1>
+
 		<div class="profile">
-
+			<h1>Votre profil</h1>
 			<div class="btn">
 				<button>
 					<a href={{path('app_modification_mdp')}}>Modifier le mot de passe</a>
@@ -30,12 +30,14 @@
 				<button type="submit" class="btn">Modifier</button>
 			</div>
 			{{form_end(editProfile)}}
+			<div class="btn">
+				<button>
+					<a href={{path('app_profile')}}>retour</a>
+				</button>
+			</div>
 		</div>
-		<div class="btn">
-			<button>
-				<a href={{path('app_profile')}}>retour</a>
-			</button>
-		</div>
+
+
 	{% endblock %}
 	{% block javascripts %}
 		{{ encore_entry_script_tags('navigation') }}

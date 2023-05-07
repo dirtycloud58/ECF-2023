@@ -11,10 +11,10 @@
 			<span id="hidden-noon">{{place.guestsNoon}}</span>
 			<span id="hidden-evening">{{place.guestsEvening}}</span>
 		{% endfor %}
-
+		<h1>Réservation</h1>
 
 		{{ form_start(reservationForm) }}
-		<h1>Réservation</h1>
+
 		<div class="form-group">
 			{{ form_label(reservationForm.email) }}
 			{{ form_widget(reservationForm.email) }}
@@ -50,14 +50,14 @@
 		<div class="btn">
 			<button type="submit" id="submit">Réserver</button>
 		</div>
+
+		{{ form_end(reservationForm) }}
 		<div class="connect">
 			{% if is_granted("ROLE_USER") %}
 				{% else %}
 					<a href="{{path('app_login')}}">Me connecter</a>
 			{% endif %}
 		</div>
-		{{ form_end(reservationForm) }}
-
 	</div>
 {% endblock %}
 {% block javascripts %}

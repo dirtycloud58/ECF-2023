@@ -53,10 +53,10 @@ CREATE TABLE user (
     email VARCHAR(255) NOT NULL,
     roles JSON NOT NULL,
     password VARCHAR(255) NOT NULL,
-    guests VARCHAR(255) NULL DEFAULT NULL,
+    guests VARCHAR(255) NOT NULL,
     PRIMARY KEY (id, email)
 );
-CREATE TABLE allergy_user (
+CREATE TABLE user_allergy (
     allergy_id INT(10) NOT NULL,
     user_id INT(10) NOT NULL,
     PRIMARY KEY (allergy_id, user_id),

@@ -33,7 +33,7 @@ INSERT INTO meal (id, description, price, category_id) VALUES
 (11, 'Salade de truite aux noix', 19, 2),
 (12, 'Polenta aux gambas', 21, 2);
 
-INSERT INTO galery (id, name, file) VALUES 
+INSERT INTO galery (id, name, file, create_at) VALUES 
 (1, 'Polenta aux gambas', 'bakd-raw-by-karolin-baitinger-ffqbgkuzeau-unsplash-6456a86b39539481665618.jpg', '2023-05-06 19:20:11'),
 (2, 'soupe de Saint-Jacques', 'max-griss-9qektazdrdk-unsplash-6456a9bae238e489950409.jpg', '2023-05-06 19:25:46'),
 (3, 'Salade de truite aux noix', 'sebastian-coman-photography-zyd9byytq8q-unsplash-6456a95c51f4e338518798.jpg', '2023-05-06 19:24:12');

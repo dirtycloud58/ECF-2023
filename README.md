@@ -42,6 +42,6 @@ vitrine pour le Quai Antique avec ce goût de la qualité que recherche Arnaud M
 - Rendez-vous dans votre terminal IDE et ouvrez le projet Symfony.
 - utilisez votre terminal et connectez-vous à la bdd ou vous pouvez utiliser le sqltools de vscode et saisissez cette commande :
   INSERT INTO user (id, email, roles, password, guests)
-  VALUES (NULL, 'admin2@quai-antique.fr', '[\"ROLE_ADMIN\"]', '$2y$13$Ryrhos7ZAP.3kOLp3RK84evMUTyvSNEU/iQv/e6aFRIQfIvRvuAgO', '1')
+  VALUES (NULL, 'admin2@quai-antique.fr', '[\"ROLE_ADMIN\"]', '$2y$13$mjFVIuHS5XOrpVGSMKR08.KC6ODMduH2pm6wmsRFol7MAPwlna9QS', '1')
 - mot de passe : AquaiAntique73.
 - Attention, si le mot de passe ne fonctionne pas, vous pouvez utiliser cette commande dans votre IDE : symfony console security:hash-password vous allez générer un mot de passe haché qu'il faudra remplacer.
